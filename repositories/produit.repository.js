@@ -1,14 +1,15 @@
 import mariadb from 'mariadb';
-import 'dotenv/config';
+import 'dotenv/config'
+
 class ProduitRepository {
     constructor() {
         this.pool = mariadb.createPool(
             {
-                host: '127.0.0.1',
-                port: '3307',
-                user: 'sam',
-                password: 'root',
-                database: 'gestionstock',
+                host: process.env.DB_HOST_NAME,
+                port: process.env.DB_PORT,
+                user: process.env.DB_USER,
+                password: process.env.DB_USER_PASSWORD,
+                database: process.env.DB_NAME,
                 connectionLimit: 5
             }
         )
@@ -58,19 +59,12 @@ const prodRepo = new ProduitRepository();
 // const product = await prodRepo.createProduit(1, 'Chips', 28, 30);
 // console.log(product);
 // Get products :
-const produits = await prodRepo.getProduits();
-console.log(produits);
+// const produits = await prodRepo.getProduits();
+// console.log(produits);
 
-// const pool = mariadb.createPool(
-//     {
-//         host: process.env.DB_HOST_NAME,
-//         port: process.env.DB_PORT,
-//         user: process.env.DB_USER,
-//         password: process.env.DB_USER_PASSWORD,
-//         database: process.env.DB_NAME,
-//         connectionLimit: 5
-//     }
-// )
+
+
+
 
 
 export default ProduitRepository;
