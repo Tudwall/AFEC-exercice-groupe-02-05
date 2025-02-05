@@ -7,3 +7,4 @@ Gestion de stock, commandes et clients en SQL.
 - Utiliser SQL
 - Pratiquer Git et Github
 - Travailler la répartition des tâches
+- Pratiquer le travail d'équipe
