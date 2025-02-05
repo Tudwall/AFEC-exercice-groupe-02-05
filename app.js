@@ -3,9 +3,14 @@ import dotenv from "dotenv";
 import produitRoutes from "./routes/produits.js";
 import userRoutes from "./routes/users.js";
 
+import swaggerUi from "swagger-ui-express";
+import swaggerDocument from "./doc/swaggerUser.json" with {type: "json"};
+
 dotenv.config();
 const app = express();
 const PORT = process.env.PORT;
+
+app.use("/docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.use(express.json());
 app.use("/produits", produitRoutes);
