@@ -8,6 +8,6 @@ router.post("/", (req, res) => produitController.createProduit(req, res));
 router.get("/:id", (req, res) => produitController.getProduitById(req, res));
 router.get("/", (req, res) => produitController.getProduits(req, res));
 router.put("/:id", (req, res) => produitController.updateProduit(req, res));
-router.delete(":id", (req, res) => produitController.deleteProduit(req, res));
+router.delete("/:id", (req, res) => produitController.deleteProduit(req, res));
 
 export default router;
