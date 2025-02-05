@@ -36,7 +36,7 @@ class UserService {
 
 	async updateUser(id, { name, email, password }) {
 		try {
-			const updatedUser = await this.userRepository(id, {
+			const updatedUser = await this.userRepository.updateUser(id, {
 				name,
 				email,
 				password,
@@ -44,6 +44,7 @@ class UserService {
 			if (!updatedUser) {
 				throw new Error("Utilisateur introuvable");
 			}
+			return { message: "Utilisateur modifié avec succès" };
 		} catch (err) {
 			throw new Error(err.message);
 		}
@@ -55,6 +56,7 @@ class UserService {
 			if (!deletedUser) {
 				throw new Error("User introuvable");
 			}
+			return { message: "User supprimé avec succès" };
 		} catch (err) {
 			throw new Error(err.message);
 		}

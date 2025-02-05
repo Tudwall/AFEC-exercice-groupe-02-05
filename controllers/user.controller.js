@@ -25,7 +25,7 @@ class UserController {
 			const users = await this.userService.getUsers();
 			res.status(200).json({ users });
 		} catch (err) {
-			throw new Error({ err: err.message });
+			res.status(400).json({ err: err.message });
 		}
 	}
 
