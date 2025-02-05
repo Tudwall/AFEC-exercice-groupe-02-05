@@ -1,7 +1,7 @@
 {
 	"name": "afec-exercice-groupe-02-05",
 	"version": "1.0.0",
-	"description": "Gestion de stock, commandes et clients en SQL.",
+	"description": "",
 	"main": "index.js",
 	"type": "module",
 	"scripts": {
