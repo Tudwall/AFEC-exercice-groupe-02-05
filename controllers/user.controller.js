@@ -33,7 +33,7 @@ class UserController {
 		const { id } = req.params;
 		try {
 			const produit = await this.userService.getUserById(id);
-			res.status(200).json({ user });
+			res.status(200).json({ produit });
 		} catch (err) {
 			res.status(404).json({ err: err.message });
 		}
