@@ -20,8 +20,10 @@
 	},
 	"homepage": "https://github.com/Tudwall/AFEC-exercice-groupe-02-05#readme",
 	"dependencies": {
+		"@prisma/client": "^6.3.1",
 		"dotenv": "^16.4.7",
 		"express": "^4.21.2",
-		"mariadb": "^3.4.0"
+		"mariadb": "^3.4.0",
+		"prisma": "^6.3.1"
 	}
 }

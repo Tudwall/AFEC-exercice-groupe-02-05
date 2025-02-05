@@ -1,59 +1,59 @@
 import mariadb from "mariadb";
 import "dotenv/config";
-
+console.log(process.env.DATABASE);
 class ProduitRepository {
-	constructor() {
-		this.pool = mariadb.createPool({
-			host: process.env.DB_HOST,
-			port: process.env.DB_PORT,
-			user: process.env.DB_USER,
-			password: process.env.DB_PASSWORD,
-			database: process.env.DATABASE,
-			connectionLimit: 5,
-		});
-	}
+  constructor() {
+    this.pool = mariadb.createPool({
+      host: process.env.DB_HOST,
+      user: process.env.DB_USER,
+      port: process.env.DB_PORT,
+      password: process.env.DB_PASSWORD,
+      database: process.env.DATABASE,
+      connectionLimit: 5,
+    });
+  }
 
-	async getProduits() {
-		let conn;
-		try {
-			conn = await this.pool.getConnection();
-			const products = await conn.query("SELECT * FROM produits");
-			return products;
-		} catch (err) {
-			console.error(err);
-		}
-	}
+  async getProduits() {
+    let conn;
+    try {
+      conn = await this.pool.getConnection();
+      const products = await conn.query("SELECT * FROM produits");
+      return products;
+    } catch (err) {
+      console.error(err);
+    }
+  }
 
-	async createProduit({ id, name, stock, price }) {
-		let conn;
-		try {
-			conn = await this.pool.getConnection();
-			await conn.query(
-				`INSERT INTO produits (id, name, stock, price)
+  async createProduit({ id, name, stock, price }) {
+    let conn;
+    try {
+      conn = await this.pool.getConnection();
+      await conn.query(
+        `INSERT INTO produits (id, name, stock, price)
                VALUES (?,?,?,?)`,
-				[id, name, stock, price]
-			);
-			return { id, name, stock, price };
-		} catch (err) {
-			console.error(err);
-		}
-	}
+        [id, name, stock, price]
+      );
+      return { id, name, stock, price };
+    } catch (err) {
+      console.error(err);
+    }
+  }
 
-	async getProduitById(id) {
-		let conn;
-		try {
-			conn = await this.pool.getConnection();
-			const product = await conn.query(
-				`SELECT * FROM produits
+  async getProduitById(id) {
+    let conn;
+    try {
+      conn = await this.pool.getConnection();
+      const product = await conn.query(
+        `SELECT * FROM produits
                 WHERE id =?
                 `,
-				[id]
-			);
-			return product;
-		} catch (err) {
-			console.error(err);
-		}
-	}
+        [id]
+      );
+      return product;
+    } catch (err) {
+      console.error(err);
+    }
+  }
 }
 
 const prodRepo = new ProduitRepository();
