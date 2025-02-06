@@ -11,4 +11,21 @@ class CommandeRepository {
       connectionLimit: 5,
     });
   }
+
+  async getCommandes() {
+    let conn;
+    try {
+      conn = await this.pool.getConnection();
+      const commandes = await conn.query("SELECT * FROM commandes");
+      return commandes;
+    } catch (err) {
+      throw new Error(
+        "Erreur lors de la récupération des commandes" + err.message
+      );
+    } finally {
+      if (conn) conn.release();
+    }
+  }
 }
+
+export default CommandeRepository;
