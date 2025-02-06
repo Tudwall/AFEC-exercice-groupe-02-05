@@ -16,7 +16,7 @@ app.use("/docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.use(express.json());
 app.use("/produits", produitRoutes);
 app.use("/users", userRoutes);
-app.use("/commande", commandeRoutes);
+app.use('/commandes', commandeRoutes)
 
 app.listen(PORT, () => {
 	console.log(`le serveur tourne actuellement sur http://localhost:${PORT}`);
