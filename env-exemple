@@ -2,5 +2,5 @@ DB_HOST = localhost
 DB_USER = user
 DB_PASSWORD = pwd
 DB_PORT= portDatabase
-DATABASE = gnomDatabase
+DATABASE = nomDatabase
 PORT = portExpress

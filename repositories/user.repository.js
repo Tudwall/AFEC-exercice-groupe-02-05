@@ -1,99 +1,84 @@
-import mariadb from "mariadb";
-
-
+import { PrismaClient } from "@prisma/client";
 
 class UserRepository {
   constructor() {
-    this.pool = mariadb.createPool({
-      host: process.env.DB_HOST,
-      user: process.env.DB_USER,
-      port: process.env.DP_PORT,
-      password: process.env.DB_PASSWORD,
-      database: process.env.DATABASE,
-      connectionLimit: 5,
-    });
+    this.prisma = new PrismaClient();
   }
+
   async createUser({ id, name, email, password }) {
-    let conn;
     try {
-      conn = await this.pool.getConnection();
-      await conn.query(
-        "INSERT INTO Users (id, name, email, password) VALUES (?,?,?,?)",
-        [id, name, email, password]
-      );
-      return { id, name, email, password };
+      id = parseInt(id);
+      return await this.prisma.users.create({
+        data: {
+          id,
+          name,
+          email,
+          password,
+        },
+      });
     } catch (err) {
       throw new Error(
-        "Erreur lors de la création de l'utilisateur: " + err.message
+        `Erreur lors de la création de l'utilisateur ${err.message}`
       );
-    } finally {
-      if (conn) conn.release();
     }
   }
 
   async getUsers() {
-    let conn;
     try {
-      conn = await this.pool.getConnection();
-      return await conn.query("SELECT * FROM Users");
+      return await this.prisma.users.findMany();
     } catch (err) {
       throw new Error(
         "Erreur lors de la récupération des utilisateurs: " + err.message
       );
-    } finally {
-      if (conn) conn.release();
     }
   }
 
   async getUserById(id) {
-    let conn;
     try {
-      conn = await this.pool.getConnection();
-      return await conn.query("SELECT * FROM Users WHERE id = ?", [id]);
-    } catch (error) {
+      id = parseInt(id);
+      const user = await this.prisma.users.findUnique({
+        where: { id },
+      });
+      if (!user) {
+        throw new Error("Utilisateur non trouvé");
+      }
+      return user;
+    } catch (err) {
       throw new Error(
         "Erreur lors de la récupération de l'utilisateur:" + err.message
       );
-    } finally {
-      if (conn) conn.release();
     }
   }
 
   async updateUser(id, { name, email, password }) {
-    let conn;
     try {
-      conn = await this.pool.getConnection();
-      const result = await conn.query(
-        "UPDATE Users SET name = ?, email = ?, password = ? WHERE id = ?",
-        [name, email, password, id]
-      );
-      if (result.affectedRows === 0) throw new Error("Utilisateur non trouvé");
-      return { id, name, email, password };
-    } catch (error) {
+      id = parseInt(id);
+      return await this.prisma.users.update({
+        where: { id },
+        data: {
+          name,
+          email,
+          password,
+        },
+      });
+    } catch (err) {
       throw new Error(
         "Erreur lors de la mise à jour de l'utilisateur" + err.message
       );
-    } finally {
-      if (conn) conn.release();
     }
   }
 
   async deleteUser(id) {
-    let conn;
     try {
-      conn = await this.pool.getConnection();
-      const result = await conn.query("DELETE FROM Users WHERE  id = ?", [id]);
-      if (result.affectedRows === 0) throw new Error("Utilisateur non trouvé");
-
-      return { message: "Utilisateur supprimé avec succés" };
-    } catch (error) {
+      id = parseInt(id);
+      return await this.prisma.users.delete({
+        where: { id },
+      });
+    } catch (err) {
       throw new Error(
-        "Erreur lors de la suppression de l'utilisateur" + message.err
+        "Erreur lors de la suppression de l'utilisateur" + err.message
       );
-    } finally {
-      if (conn) conn.release();
     }
   }
-}
 
 export default UserRepository;
