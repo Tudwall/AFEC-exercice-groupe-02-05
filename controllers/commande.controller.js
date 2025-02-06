@@ -1,10 +1,19 @@
 import CommandeService from "../services/commande.service.js";
 
 class CommandeController {
-  constructor() {
-    this.commandeService = new CommandeService();
-  }
 
+    constructor() {
+        this.commandeService = new CommandeService();
+    }
+    async deleteCommande(req, res) {
+        const { id } = req.params;
+        try {
+            const result = await this.commandeService.deleteCommande(id);
+            res.status(200).json(result);
+        } catch (err) {
+            res.status(500).json({ err: err.message });
+        }
+    }
   async getCommandes(req, res) {
     try {
       const commandes = await this.commandeService.getCommandes();
@@ -32,3 +41,4 @@ class CommandeController {
 }
 
 export default CommandeController;
+

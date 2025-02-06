@@ -1,5 +1,4 @@
 import mariadb from "mariadb";
-
 class CommandeRepository {
   constructor() {
     this.pool = mariadb.createPool({
@@ -44,6 +43,26 @@ class CommandeRepository {
 			if (conn) conn.release();
 		}
 	}
+  async deleteCommande(id) {
+        let conn;
+        try {
+            conn = await this.pool.getConnection();
+            const result = await conn.query(
+                `DELETE FROM commandes
+                WHERE id =?
+                `,
+                [id]
+            );
+            if (result.affectedRows === 0) throw new Error("Commande non trouvé");
+            return { message: "Commande  supprimé avec succés" };
+        } catch (err) {
+            throw new Error(
+                "Erreur lors de la récupération de la Commande  :" + err.message
+            );
+        } finally {
+            if (conn) conn.release();
+        }
 }
 
 export default CommandeRepository;
+
