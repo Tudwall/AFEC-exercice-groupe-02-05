@@ -26,7 +26,7 @@ class CommandeRepository {
       if (conn) conn.release();
     }
   }
-  async getCommandeById() {
+  async getCommandeById(id) {
     let conn;
     try {
       conn = await this.pool.getConnection();

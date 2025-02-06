@@ -15,8 +15,9 @@ class CommandeController {
   }
 
   async getCommandeById(req, res) {
+    const { id } = req.params;
     try {
-      const commande = await this.commandeService.getCommandebyId();
+      const commande = await this.commandeService.getCommandeById(id);
       res.status(200).json({ commande });
     } catch (err) {
       res.status(400).json({ err: err.message });

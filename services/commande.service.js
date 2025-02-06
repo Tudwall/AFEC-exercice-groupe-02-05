@@ -13,9 +13,9 @@ class CommandeService {
     }
   }
 
-  async getCommandeById() {
+  async getCommandeById(id) {
     try {
-      return await this.commandeRepository.getCommandeById();
+      return await this.commandeRepository.getCommandeById(id);
     } catch (err) {
       throw new Error(err.message);
     }
