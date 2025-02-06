@@ -1,28 +1,30 @@
 {
-	"name": "afec-exercice-groupe-02-05",
-	"version": "1.0.0",
-	"description": "Gestion de stock, commandes et clients en SQL.",
-	"main": "index.js",
-	"type": "module",
-	"scripts": {
-		"start": "nodemon app.js",
-		"test": "echo \"Error: no test specified\" && exit 1"
-	},
-	"repository": {
-		"type": "git",
-		"url": "git+https://github.com/Tudwall/AFEC-exercice-groupe-02-05.git"
-	},
-	"keywords": [],
-	"author": "",
-	"license": "ISC",
-	"bugs": {
-		"url": "https://github.com/Tudwall/AFEC-exercice-groupe-02-05/issues"
-	},
-	"homepage": "https://github.com/Tudwall/AFEC-exercice-groupe-02-05#readme",
-	"dependencies": {
-		"dotenv": "^16.4.7",
-		"express": "^4.21.2",
-		"mariadb": "^3.4.0",
-		"swagger-ui-express": "^5.0.1"
-	}
+  "name": "afec-exercice-groupe-02-05",
+  "version": "1.0.0",
+  "description": "Gestion de stock, commandes et clients en SQL.",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "nodemon app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Tudwall/AFEC-exercice-groupe-02-05.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Tudwall/AFEC-exercice-groupe-02-05/issues"
+  },
+  "homepage": "https://github.com/Tudwall/AFEC-exercice-groupe-02-05#readme",
+  "dependencies": {
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "mariadb": "^3.4.0",
+    "swagger-ui-express": "^5.0.1",
+    "prisma": "*",
+    "@prisma/client": "*"
+  }
 }
