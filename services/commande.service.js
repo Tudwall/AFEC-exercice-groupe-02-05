@@ -34,6 +34,17 @@ class CommandeService {
       throw new Error(err.message);
     }
   }
+  async deleteCommande(id) {
+    try {
+      const deletedProduit = await this.commandeRepository.deleteCommande(id);
+      if (!deletedProduit) {
+        throw new Error("Commande Introuvable introuvable");
+      }
+      return { message: "Commande supprimé" };
+    } catch (err) {
+      throw new Error(err.message);
+    }
+  }
 }
 
 export default CommandeService;
